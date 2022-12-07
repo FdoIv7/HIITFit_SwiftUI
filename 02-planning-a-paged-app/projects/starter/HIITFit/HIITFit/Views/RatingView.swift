@@ -32,44 +32,21 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+struct RatingView: View {
     var body: some View {
-        ZStack {
-            VStack {
-                HStack(alignment: .bottom) {
-                    VStack(alignment: .leading) {
-                        Text("Get fit")
-                            .font(.largeTitle)
-                        Text("with high intesity interval training")
-                            .font(.headline)
-                    }
-                    Image("step-up")
-                        .resizedToFill(width: 240, height: 240)
-                        .clipShape(Circle())
-                }
-                Button(action: {}) {
-                    Text("Get started")
-                    Image(systemName: "arrow.right.circle")
-                }
-                .font(.title2)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.gray, lineWidth: 2))
-            }
-            VStack {
-                HeaderView(titleText: "Welcome")
-                Spacer()
-                Button("History") { }
-                    .padding(.bottom)
+        HStack {
+            ForEach(0..<5) { _ in
+                Image(systemName: "waveform.path.ecg")
+                    .foregroundColor(.gray)
+                    .font(.largeTitle)
             }
         }
     }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
+struct RatingView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
-            .previewDevice("iPad mini (6th generation)")
+        RatingView()
+            .previewLayout(.sizeThatFits)
     }
 }

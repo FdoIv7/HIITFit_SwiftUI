@@ -32,44 +32,40 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+struct HistoryView: View {
+
+    let history = HistoryStore()
+    
     var body: some View {
-        ZStack {
-            VStack {
-                HStack(alignment: .bottom) {
-                    VStack(alignment: .leading) {
-                        Text("Get fit")
-                            .font(.largeTitle)
-                        Text("with high intesity interval training")
-                            .font(.headline)
-                    }
-                    Image("step-up")
-                        .resizedToFill(width: 240, height: 240)
-                        .clipShape(Circle())
-                }
-                Button(action: {}) {
-                    Text("Get started")
-                    Image(systemName: "arrow.right.circle")
-                }
-                .font(.title2)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.gray, lineWidth: 2))
+        ZStack(alignment: .topTrailing) {
+            Button(action: {}) {
+                Image(systemName: "xmark.circle")
             }
+            .font(.title)
+            .padding(.trailing)
             VStack {
-                HeaderView(titleText: "Welcome")
-                Spacer()
-                Button("History") { }
-                    .padding(.bottom)
+                Text("History")
+                    .font(.title)
+                    .padding()
+                Form {
+                    ForEach(history.exerciseDays) { day in
+                        Section {
+                            ForEach(day.exercises, id: \.self) { exercise in
+                                Text(exercise)
+                            }
+                        } header: {
+                            Text(day.date.formatted(as: "MMM d"))
+                                .font(.headline)
+                        }
+                    }
+                }
             }
         }
     }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
+struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
-            .previewDevice("iPad mini (6th generation)")
+        HistoryView()
     }
 }

@@ -32,44 +32,38 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+struct SuccessView: View {
+    let message = """
+        Good job completing all four exercises! \
+        Remember tomorrow's another day \
+        So eat well and get some rest.
+        """
     var body: some View {
         ZStack {
-            VStack {
-                HStack(alignment: .bottom) {
-                    VStack(alignment: .leading) {
-                        Text("Get fit")
-                            .font(.largeTitle)
-                        Text("with high intesity interval training")
-                            .font(.headline)
-                    }
-                    Image("step-up")
-                        .resizedToFill(width: 240, height: 240)
-                        .clipShape(Circle())
-                }
-                Button(action: {}) {
-                    Text("Get started")
-                    Image(systemName: "arrow.right.circle")
-                }
-                .font(.title2)
-                .padding()
-                .background(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.gray, lineWidth: 2))
+            VStack(spacing: 25) {
+                Image(systemName: "hand.raised.fill")
+                    .resizedToFill(width: 75, height: 75)
+                    .foregroundColor(.purple)
+                Text("High Five!")
+                    .fontWeight(.bold)
+                Text(self.message)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .padding()
             }
             VStack {
-                HeaderView(titleText: "Welcome")
                 Spacer()
-                Button("History") { }
-                    .padding(.bottom)
+                Button("Continue") {
+                    
+                }
+                .padding()
             }
         }
     }
 }
 
-struct WelcomeView_Previews: PreviewProvider {
+struct SuccessView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
-            .previewDevice("iPad mini (6th generation)")
+        SuccessView()
     }
 }
